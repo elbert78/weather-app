@@ -5,7 +5,9 @@ const about: NextPage = () => {
   return (
     <div>
       <NavBar />
-      <h1>About Page</h1>
+      <div className="mx-8 my-6">
+        <h1>About Page</h1>
+      </div>
     </div>
   );
 };

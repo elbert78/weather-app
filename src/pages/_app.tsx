@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="w-screen h-screen bg-gray-100">
+    <div className="max-w-full max-h-full min-h-screen bg-gray-50 min-w-screen">
       <Component {...pageProps} />
     </div>
   );
