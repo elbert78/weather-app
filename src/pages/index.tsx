@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import Navbar from "../components/NavBar";
+import Card from "../components/Card";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // ...
@@ -14,10 +15,11 @@ const Home: NextPage = ({ data }: any) => {
   console.log(data.consolidated_weather);
 
   return (
-    <div className="flex flex-col max-w-full max-h-full min-h-screen min-w-screen">
+    <div className="flex flex-col max-w-full max-h-full min-h-screen max-w-screen min-w-screen">
       <Navbar />
-      <div className="grid items-stretch flex-1 grid-cols-3 grid-rows-3 gap-8 px-8 py-6">
-        <div className="flex flex-row w-full h-full row-span-3 gap-4 p-10 bg-gray-100 rounded-lg shadow-lg">
+      <div className="grid flex-auto grid-cols-3 grid-rows-3 gap-8 px-8 py-6">
+        {/* flex flex-row w-full h-full row-span-3 gap-4 bg-gray-100 rounded-lg shadow-lg p-7 */}
+        <Card className="flex flex-row w-full h-full row-span-3 gap-4">
           <div>
             <Image
               src={`https://www.metaweather.com/static/img/weather/${data.consolidated_weather[0].weather_state_abbr}.svg`}
@@ -36,21 +38,26 @@ const Home: NextPage = ({ data }: any) => {
               {data.consolidated_weather[0].weather_state_name}
             </div>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-gray-100 rounded-lg shadow-lg">
+        <Card>
+          <div>Temperature</div>
           {data.consolidated_weather[0].the_temp}
-        </div>
-        <div className="bg-gray-100 rounded-lg shadow-lg">
+        </Card>
+        <Card>
+          <div>Humidity</div>
           {data.consolidated_weather[0].humidity}
-        </div>
-        <div className="bg-gray-100 rounded-lg shadow-lg">
+        </Card>
+        <Card>
+          <div>Wind Speed</div>
           {data.consolidated_weather[0].wind_speed}
-        </div>
-        <div className="bg-gray-100 rounded-lg shadow-lg">
+        </Card>
+        <Card>
+          <div>Predictability</div>
           {data.consolidated_weather[0].predictability}
-        </div>
-        <div className="flex flex-row justify-around flex-auto w-full h-full col-span-2 gap-4 p-10 bg-gray-100 rounded-lg shadow-lg">
+        </Card>
+        {/* flex flex-row justify-around flex-auto w-full h-full col-span-2 gap-4 bg-gray-100 rounded-lg shadow-lg p-7 */}
+        <Card className="flex flex-row justify-around flex-auto w-full h-full col-span-2 gap-4">
           {data.consolidated_weather.slice(0).map((item: any, id: any) => {
             return (
               <div key={id} className="flex flex-col items-center">
@@ -67,7 +74,7 @@ const Home: NextPage = ({ data }: any) => {
               </div>
             );
           })}
-        </div>
+        </Card>
       </div>
     </div>
   );
