@@ -3,9 +3,9 @@ import Image from "next/image";
 import Navbar from "../components/NavBar";
 import Card from "../components/Card";
 import Clock from "react-live-clock";
+import Unit from "../components/Unit";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // ...
   const res = await fetch("https://www.metaweather.com/api/location/1047378/");
   const data = await res.json();
 
@@ -13,8 +13,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Home: NextPage = ({ data }: any) => {
-  console.log(data);
-
   return (
     <div className="flex flex-col max-w-full max-h-full min-h-screen max-w-screen min-w-screen">
       <Navbar />
@@ -38,7 +36,7 @@ const Home: NextPage = ({ data }: any) => {
               <Clock format={"dddd"} ticking={true}></Clock>
             </div>
             <div className="mt-2">
-              <Clock format={"DD MMMM YYYY "} ticking={true} />
+              <Clock format={"DD MMMM YYYY"} ticking={true} />
             </div>
             <div className="mt-2">
               <Clock format={"h:mm A"} ticking={true} />
@@ -46,64 +44,40 @@ const Home: NextPage = ({ data }: any) => {
           </div>
         </Card>
 
-        <Card>
-          <div className="text-xl text-gray-500">Temperature</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {Math.round(data.consolidated_weather[0].the_temp * 10) / 10}
-              <div className="mt-5 ml-2 text-xl font-normal">
-                <span>&#176;</span>C
-              </div>
-            </div>
-          </div>
-        </Card>
-        <Card>
-          <div className="text-xl text-gray-500">Humidity</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {data.consolidated_weather[0].humidity}
-              <div className="mt-5 ml-2 text-xl font-normal">%</div>
-            </div>
-          </div>
-        </Card>
-        <Card>
-          <div className="text-xl text-gray-500 ">Wind Speed</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {Math.round(data.consolidated_weather[0].wind_speed * 10) / 10}
-              <div className="mt-5 ml-2 text-xl font-normal">mph</div>
-            </div>
-          </div>
-        </Card>
-        <Card className="flex flex-col ">
-          <div className="text-xl text-gray-500 ">Air Pressure</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {Math.round(data.consolidated_weather[0].air_pressure * 10) / 10}
-              <div className="mt-5 ml-2 text-xl font-normal">mbar</div>
-            </div>
-          </div>
-        </Card>
-        <Card>
-          <div className="text-xl text-gray-500 ">Visibility</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {Math.round(data.consolidated_weather[0].visibility * 10) / 10}
-              <div className="mt-5 ml-2 text-xl font-normal">miles</div>
-            </div>
-          </div>
-        </Card>
-        <Card>
-          <div className="text-xl text-gray-500">Predictability</div>
-          <div className="flex flex-row items-center w-full h-2/3">
-            <div className="flex flex-row w-full text-5xl font-semibold">
-              {data.consolidated_weather[0].predictability}
-              <div className="mt-5 ml-2 text-xl font-normal">%</div>
-            </div>
-          </div>
-        </Card>
+        <Unit
+          name="Temperature"
+          data={Math.round(data.consolidated_weather[0].the_temp * 10) / 10}
+          unit="C"
+        />
+        <Unit
+          name="Humidity"
+          data={data.consolidated_weather[0].humidity}
+          unit="%"
+        />
+        <Unit
+          name="Wind Speed"
+          data={Math.round(data.consolidated_weather[0].wind_speed * 10) / 10}
+          unit="mph"
+        />
+        <Unit
+          name="Air Pressure"
+          data={Math.round(data.consolidated_weather[0].air_pressure * 10) / 10}
+          unit="mbar"
+        />
+        <Unit
+          name="Visibility"
+          data={Math.round(data.consolidated_weather[0].visibility * 10) / 10}
+          unit="miles"
+        />
+
+        <Unit
+          name="Predictability"
+          data={data.consolidated_weather[0].predictability}
+          unit="%"
+        />
+
         <Card className="flex flex-row justify-around flex-auto w-full h-full col-span-3 gap-4">
-          {data.consolidated_weather.slice(0).map((item: any, id: any) => {
+          {data.consolidated_weather.slice(1).map((item: any, id: any) => {
             return (
               <div key={id} className="flex flex-col items-center">
                 <div>{item.applicable_date}</div>
