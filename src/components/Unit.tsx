@@ -1,4 +1,11 @@
-const Unit = (props: any) => {
+interface UnitProps {
+  className?: String;
+  name: String;
+  data: any;
+  unit: JSX.Element | String;
+}
+
+const Unit = (props: UnitProps) => {
   return (
     <div className={`bg-gray-100 rounded-lg shadow-lg p-7 ${props.className}`}>
       <div className="text-xl text-gray-500">{props.name}</div>

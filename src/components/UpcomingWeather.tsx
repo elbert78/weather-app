@@ -1,10 +1,13 @@
 import Image from "next/image";
+import { useAppSelector } from "../hooks/customReduxHook";
 import Card from "./Card";
 
 const UpcomingWeather = () => {
+  const weather: any = useAppSelector((state) => state.weather.weather);
+
   return (
     <Card className="flex flex-row justify-around flex-auto w-full h-full col-span-3 gap-4">
-      {data.consolidated_weather.slice(1).map((item: any, id: any) => {
+      {weather.consolidated_weather.slice(1).map((item: any, id: any) => {
         return (
           <div key={id} className="flex flex-col items-center">
             <div>{item.applicable_date}</div>
