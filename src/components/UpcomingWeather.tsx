@@ -14,7 +14,7 @@ const UpcomingWeather = () => {
             <div>
               <Image
                 src={`https://www.metaweather.com/static/img/weather/${item.weather_state_abbr}.svg`}
-                alt=""
+                alt={item.weather_state_abbr}
                 width="150"
                 height="150"
               />

@@ -1,3 +1,4 @@
+import Card from "./Card";
 interface UnitProps {
   className?: String;
   name: String;
@@ -7,7 +8,7 @@ interface UnitProps {
 
 const Unit = (props: UnitProps) => {
   return (
-    <div className={`bg-gray-100 rounded-lg shadow-lg p-7 ${props.className}`}>
+    <Card className={props.className}>
       <div className="text-xl text-gray-500">{props.name}</div>
       <div className="flex flex-row items-center w-full h-2/3">
         <div className="flex flex-row w-full text-5xl font-semibold">
@@ -18,7 +19,7 @@ const Unit = (props: UnitProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
