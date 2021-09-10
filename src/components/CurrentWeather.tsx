@@ -1,4 +1,3 @@
-import Card from "../components/Card";
 import Clock from "react-live-clock";
 import Image from "next/image";
 import { useAppSelector } from "../hooks/customReduxHook";
@@ -7,7 +6,7 @@ import SearchBar from "./SearchBar";
 const CurrentWeather = () => {
   const weather: any = useAppSelector((state) => state.weather.weather);
   return (
-    <Card className="flex flex-col items-center justify-center w-full h-full row-span-3 gap-4">
+    <div className="flex flex-col items-center justify-center w-full h-full row-span-3 gap-4 bg-gray-100 rounded-lg shadow-lg p-7">
       <SearchBar />
       <div className="text-5xl text-gray-800">Today</div>
       <div className="text-3xl">{weather.title}</div>
@@ -33,7 +32,7 @@ const CurrentWeather = () => {
           <Clock format={"h:mm A"} ticking={true} />
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
