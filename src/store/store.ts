@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counter";
 import weatherReducer from "./weatherSlice";
 
 export const store = configureStore({

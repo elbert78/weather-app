@@ -2,11 +2,13 @@ import Card from "../components/Card";
 import Clock from "react-live-clock";
 import Image from "next/image";
 import { useAppSelector } from "../hooks/customReduxHook";
+import SearchBar from "./SearchBar";
 
 const CurrentWeather = () => {
   const weather: any = useAppSelector((state) => state.weather.weather);
   return (
     <Card className="flex flex-col items-center justify-center w-full h-full row-span-3 gap-4">
+      <SearchBar />
       <div className="text-5xl text-gray-800">Today</div>
       <div className="text-3xl">{weather.title}</div>
       <div className="mt-4">
