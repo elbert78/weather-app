@@ -24,9 +24,9 @@ const Home: NextPage = ({ data }: any) => {
   }
 
   return (
-    <div className="flex flex-col max-w-full max-h-full min-h-screen max-w-screen min-w-screen">
+    <div className="flex flex-col max-h-screen min-h-screen max-w-screen min-w-screen">
       <Navbar />
-      <div className="grid flex-auto grid-cols-4 grid-rows-3 gap-8 px-8 py-6">
+      <div className="grid flex-auto grid-cols-4 grid-rows-3 gap-6 px-8 py-6">
         <CurrentWeather />
         <CurrentStats />
         <UpcomingWeather />

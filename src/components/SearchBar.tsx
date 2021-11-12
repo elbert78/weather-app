@@ -1,17 +1,30 @@
 import { SearchIcon } from "@heroicons/react/solid";
 import { Formik, Form, Field } from "formik";
-import useSWR from "swr";
+import { useAppDispatch } from "../hooks/customReduxHook";
+import { setWeather } from "../store/weatherSlice";
 
 const SearchBar = () => {
+  const dispatch = useAppDispatch();
   const fetchData = async (values: any) => {
-    // `https://www.metaweather.com/api/location/search/?query=${values.data.replace(/\s+/g,"%20")}`
+    let woeid = await fetch(
+      `https://www.metaweather.com/api/location/search/?query=${values.data.replace(
+        /\s+/g,
+        "%20"
+      )}`
+    ).then((res) => res.json());
+
+    let weather = await fetch(
+      `https://www.metaweather.com/api/location/${woeid[0].woeid}`
+    ).then((res) => res.json());
+
+    dispatch(setWeather(weather));
   };
   return (
     <div className="w-full">
       <Formik
         initialValues={{ data: "" }}
         onSubmit={async (values, { resetForm }) => {
-          await fetchData(values);
+          fetchData(values);
           resetForm();
         }}
       >
